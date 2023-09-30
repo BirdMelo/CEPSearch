@@ -1,6 +1,7 @@
 package Operations;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 
 import java.io.IOException;
 import java.net.URI;
@@ -18,14 +19,15 @@ public class SearchHttp {
                 .uri(address)
                 .build();
 
-        HttpResponse<String> response = null;
         try {
-             response = HttpClient
+            HttpResponse<String> response = HttpClient
                      .newHttpClient()
                      .send(request,HttpResponse.BodyHandlers.ofString());
-        } catch (IOException | InterruptedException e) {
+
+            return new Gson().fromJson(response.body(), Address.class);
+
+        } catch (Exception e) {
             throw new RuntimeException("Endereço errado.");
         }
-        return new Gson().fromJson(response.body(), Address.class);
     }
 }
