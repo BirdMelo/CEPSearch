@@ -1,5 +1,5 @@
 package Operations;
 
-public record Address(String CEP, String place, String complement,
-                      String neighborhood, String state, String uf) {
+public record Address(String cep, String logradouro, String complemento,
+                      String bairro, String localidade, String uf) {
 }
